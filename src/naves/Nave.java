@@ -22,4 +22,30 @@ public class Nave {
 		System.out.println("Capacidad de la bodega: " + bodega.getCapacidad() + "T");
 		
 	}
+	
+	
+	public void repararNave(int cantidad) {
+		this.vida+=cantidad;
+		
+		if(this.vida>=100) {
+			this.vida=100;
+		}
+		
+	}
+	public String getNombre() {
+		return nombre;
+	}
+
+	public int getVida() {
+		return vida;
+	}
+
+	public Bodega getBodega() {
+		return bodega;
+	}
+
+	public VelocidadNave getVelocidad() {
+		return velocidad;
+	}
+	
 }
