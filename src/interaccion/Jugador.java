@@ -4,16 +4,17 @@ import naves.Nave;
 
 public class Jugador {
 
+	private final int ENERGIA_INICIAL = 100;
+	private final int CREDITOS_INICIALES = 0;
+	
 	private String nombre;
-	private int energia;
-	private int creditos;
+	private int energia = ENERGIA_INICIAL;
+	private int creditos = CREDITOS_INICIALES;
 	private Nave nave;
 	
-	public Jugador(String nombre, int creditos, int energia,  Nave nave) {
+	public Jugador(String nombre, Nave nave) {
 				
 		this.nombre = nombre;
-		this.creditos = creditos;
-		this.energia = energia;
 		this.nave = nave;
 		
 	}
@@ -37,10 +38,10 @@ public class Jugador {
 	public void mostrarDatos() {
 		
 		System.out.println("Datos del jugador:");
-		System.out.println("Nombre:" +nombre);
-		System.out.println("Creditos: "+creditos);
-		System.out.println("Energia:" +energia);
-		System.out.println("Nave: "+nave);
+		System.out.println("Nombre:" + nombre);
+		System.out.println("Creditos: " + creditos);
+		System.out.println("Energia:" + energia);
+		nave.mostrarDatos();
 			
 	}
 	
@@ -49,7 +50,7 @@ public class Jugador {
 		this.creditos += creditos;
 		
 		if(this.creditos < 0) {
-			this.creditos = 0;
+			throw new IllegalArgumentException("Los creditos no pueden ser negativos");
 		}
 		
 	}
@@ -57,22 +58,16 @@ public class Jugador {
 	public void restarEnergia(int energia) {
 		
 		this.energia -= energia;
+		
 		if(this.energia < 0) {
-			this.energia = 0;
+			throw new IllegalArgumentException("La energia no puede ser negativa");
 		}
+		
 	}
 		
 	public void descansar() {
-		this.energia = 100;
+		this.energia = ENERGIA_INICIAL;
 	}
 	
 	
-	}
-		
-	
-		
-		
-	
-	
-	
-
+}

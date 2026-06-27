@@ -65,17 +65,13 @@ public abstract class Planeta {
 	
 	public void mostrarDatos() {
 		
-		boolean esperaOriginal = Configuracion.hayEspera;
-		Configuracion.hayEspera = false;
-		
-		Salida.imprimir("Planeta " + this.tipo.getNombre());
-		Salida.imprimir("Recursos:");
+		System.out.println("Planeta " + this.tipo.getNombre());
+		System.out.println("Recursos:");
 		
 		for(Recurso recurso : recursosDisponibles) {
-			Salida.imprimir("- " + recurso.getNombre() + " " + recurso.getProbabilidad() + "%");
+			System.out.println("- " + recurso.getNombre() + " " + recurso.getProbabilidad() + "%");
 		}
 		
-		Configuracion.hayEspera = esperaOriginal;
 	}
 
 }

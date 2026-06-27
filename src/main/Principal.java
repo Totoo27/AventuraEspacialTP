@@ -3,19 +3,20 @@ package main;
 import utilidades.*;
 
 import planetas.*;
+import interaccion.*;
+import naves.*;
 
 public class Principal {
 
 	public static void main(String[] args) {
 
-		Planeta planeta = new Gaseoso();
+		Jugador jugador = new Jugador("Juan", new Fenix());
 		
-		planeta.mostrarDatos();
+		jugador.mostrarDatos();
 		
-		for(int i = 0; i<10; i++) {
-			Salida.imprimir( (i+1) + " - " + planeta.getRecursoAleatorio().getNombre());
-		}
+		jugador.operarCreditos(10);
 		
+		jugador.mostrarDatos();
 		
 	}
 

@@ -36,7 +36,7 @@ public abstract class Recurso {
 	}
 	
 	public void mostrarDatos() {
-		Salida.imprimir("Nombre: " + this.nombre + " | " + this.peso + "Tons. | " + this.valor + "$ | ");
+		Salida.imprimir("Nombre: " + this.nombre + " | " + this.peso + "T | " + this.valor + "$");
 	}
 
 	public String getNombre() {

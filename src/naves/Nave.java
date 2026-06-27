@@ -1,10 +1,11 @@
 package naves;
 
 public class Nave {
-	final int VIDA_INICIAL=100;
+	
+	private final int VIDA_INICIAL = 100;
 	
 	private String nombre;
-	private int vida=VIDA_INICIAL;
+	private int vida = VIDA_INICIAL;
 	private Bodega bodega;
 	private VelocidadNave velocidad;
 	
@@ -15,23 +16,26 @@ public class Nave {
 	}
 	
 	public void mostrarDatos() {
+		
 		System.out.println("Datos de la nave:");
-		System.out.println("Nombre" + nombre);
-		System.out.println("Vida;" + this.vida + "%");
-		System.out.println("Velocidad:" + velocidad);
+		System.out.println("Nombre: " + nombre);
+		System.out.println("Vida: " + this.vida + "%");
+		System.out.println("Velocidad: " + velocidad);
 		System.out.println("Capacidad de la bodega: " + bodega.getCapacidad() + "T");
 		
 	}
 	
 	
 	public void repararNave(int cantidad) {
-		this.vida+=cantidad;
 		
-		if(this.vida>=100) {
-			this.vida=100;
+		this.vida += cantidad;
+		
+		if(this.vida >= 100) {
+			this.vida = 100;
 		}
 		
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
