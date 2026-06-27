@@ -8,6 +8,13 @@ public class NucleoEnergetico extends Recurso{
 		
 	}
 	
+	public NucleoEnergetico(NucleoEnergetico nucleoEnergetico) {
+		super(nucleoEnergetico);
+	}
 	
+	@Override
+	public Recurso copiar() {
+        return new NucleoEnergetico(this);
+    }
 	
 }

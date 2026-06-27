@@ -8,5 +8,13 @@ public class Gas extends Recurso{
 		
 	}
 	
+	public Gas(Gas gas) {
+		super(gas);
+	}
+	
+	@Override
+	public Recurso copiar() {
+        return new Gas(this);
+    }
 	
 }

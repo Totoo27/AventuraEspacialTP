@@ -8,6 +8,8 @@ import utilidades.Salida;
 
 public abstract class Planeta {
 
+	private final int PORCENTAJE_TOTAL = 100;
+	
 	private TipoPlaneta tipo;
 	protected ArrayList<Recurso> recursosDisponibles;
 	
@@ -33,17 +35,28 @@ public abstract class Planeta {
 			
 		}
 		
-		if(probabilidadTotal != 100) {
-			throw new IllegalArgumentException("El total de la probabilidad de aparicion de los recursos debe ser de 100%");
+		if(probabilidadTotal != PORCENTAJE_TOTAL) {
+			throw new IllegalArgumentException("El total de la probabilidad de aparicion de los recursos debe ser de " + PORCENTAJE_TOTAL + "%");
 		}
 		
 	}
 	
 	public Recurso getRecursoAleatorio() {
 		
-		Recurso recurso = null;
+		int numero = Aleatorio.getRandomInt(1, PORCENTAJE_TOTAL);
+		int probabilidad = 0;
 		
-		return recurso;
+		for(Recurso recurso : recursosDisponibles) {
+			
+			probabilidad += recurso.getProbabilidad();
+			
+			if(numero <= probabilidad) {
+				return recurso.copiar();
+			}
+			
+		}
+		
+		throw new IllegalStateException("Las probabilidades no suman " + PORCENTAJE_TOTAL + ".");
 	}
 	
 	public TipoPlaneta getTipo() {

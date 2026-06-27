@@ -8,5 +8,13 @@ public class Lava extends Recurso{
 		
 	}
 	
+	public Lava(Lava lava) {
+		super(lava);
+	}
+	
+	@Override
+	public Recurso copiar() {
+        return new Lava(this);
+    }
 	
 }

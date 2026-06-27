@@ -26,6 +26,15 @@ public abstract class Recurso {
 		
 	}
 	
+	public Recurso(Recurso recurso) {
+		
+		this.nombre = recurso.getNombre();
+		this.valor = recurso.getValor();
+		this.peso = recurso.getPeso();
+		this.probabilidad = recurso.getProbabilidad();
+		
+	}
+	
 	public void mostrarDatos() {
 		Salida.imprimir("Nombre: " + this.nombre + " | " + this.peso + "Tons. | " + this.valor + "$ | ");
 	}
@@ -45,5 +54,7 @@ public abstract class Recurso {
 	public int getProbabilidad() {
 		return this.probabilidad;	
 	}
+	
+	public abstract Recurso copiar();
 	
 }

@@ -8,5 +8,13 @@ public class Plasma extends Recurso{
 		
 	}
 	
+	public Plasma(Plasma plasma) {
+		super(plasma);
+	}
+	
+	@Override
+	public Recurso copiar() {
+        return new Plasma(this);
+    }
 	
 }

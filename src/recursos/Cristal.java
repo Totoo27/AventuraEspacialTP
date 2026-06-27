@@ -8,5 +8,13 @@ public class Cristal extends Recurso{
 		
 	}
 	
+	public Cristal(Cristal cristal) {
+		super(cristal);
+	}
+	
+	@Override
+	public Recurso copiar() {
+        return new Cristal(this);
+    }
 	
 }
