@@ -8,5 +8,13 @@ public class MineralComun extends Recurso{
 		
 	}
 	
+	public MineralComun(MineralComun mineralComun) {
+		super(mineralComun);
+	}
+	
+	@Override
+	public Recurso copiar() {
+        return new MineralComun(this);
+    }
 	
 }

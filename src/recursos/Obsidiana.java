@@ -8,5 +8,13 @@ public class Obsidiana extends Recurso{
 		
 	}
 	
+	public Obsidiana(Obsidiana obsidiana) {
+		super(obsidiana);
+	}
+	
+	@Override
+	public Recurso copiar() {
+        return new Obsidiana(this);
+    }
 	
 }
