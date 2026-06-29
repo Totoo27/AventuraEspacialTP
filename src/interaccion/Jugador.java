@@ -38,9 +38,9 @@ public class Jugador {
 	public void mostrarDatos() {
 		
 		System.out.println("Datos del jugador:");
-		System.out.println("Nombre:" + nombre);
+		System.out.println("Nombre: " + nombre);
 		System.out.println("Creditos: " + creditos);
-		System.out.println("Energia:" + energia);
+		System.out.println("Energia: " + energia + "%");
 		nave.mostrarDatos();
 			
 	}

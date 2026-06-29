@@ -28,10 +28,28 @@ public class Nave {
 	
 	public void repararNave(int cantidad) {
 		
+		if(cantidad <= 0) {
+			throw new IllegalArgumentException("La cantidad debe ser mayor a 0.");
+		}
+		
 		this.vida += cantidad;
 		
-		if(this.vida >= 100) {
-			this.vida = 100;
+		if(this.vida > VIDA_INICIAL) {
+			this.vida = VIDA_INICIAL;
+		}
+		
+	}
+	
+	public void recibirDanio(int cantidad) {
+		
+		if(cantidad <= 0) {
+			throw new IllegalArgumentException("La cantidad debe ser mayor a 0.");
+		}
+		
+		this.vida -= cantidad;
+		
+		if(this.vida < 0) {
+			this.vida = 0;
 		}
 		
 	}
