@@ -52,6 +52,8 @@ public class Nave {
 			this.vida = 0;
 		}
 		
+		System.out.println("La nave recibió " + cantidad + "% de daño");
+		
 	}
 	
 	public String getNombre() {
