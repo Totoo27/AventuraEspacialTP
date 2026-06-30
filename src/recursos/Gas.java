@@ -8,6 +8,12 @@ public class Gas extends Recurso{
 		
 	}
 	
+	public Gas() {
+		
+		super("Gas", 35, 15, 100);
+		
+	}
+	
 	public Gas(Gas gas) {
 		super(gas);
 	}

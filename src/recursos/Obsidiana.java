@@ -3,9 +3,11 @@ package recursos;
 public class Obsidiana extends Recurso{
 
 	public Obsidiana(int probabilidad) {
-		
-		super("Obsidiana", 35, 15, probabilidad);
-		
+		super("Obsidiana", 35, 15, probabilidad);	
+	}
+	
+	public Obsidiana() {
+		super("Obsidiana", 35, 15, 100);	
 	}
 	
 	public Obsidiana(Obsidiana obsidiana) {

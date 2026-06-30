@@ -63,6 +63,14 @@ public class Nave {
 	public int getVida() {
 		return vida;
 	}
+	
+	public int getVidaMaxima() {
+		return VIDA_INICIAL;
+	}
+	
+	public boolean isVidaAlMaximo() {
+		return VIDA_INICIAL == this.vida;
+	}
 
 	public Bodega getBodega() {
 		return bodega;

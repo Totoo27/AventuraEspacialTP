@@ -7,7 +7,7 @@ public class Entrada{
 
 	private Scanner s = new Scanner(System.in);
 	
-	public int IngresarEntero(int min, int max) {
+	public int ingresarEntero(int min, int max) {
 		
 		if(min > max) {
 			throw new IllegalArgumentException("El minimo no puede ser mayor al maximo");
@@ -46,6 +46,10 @@ public class Entrada{
 		
 		return numero;
 		
+	}
+	
+	public void cerrarScanner() {
+		s.close();
 	}
 	
 }

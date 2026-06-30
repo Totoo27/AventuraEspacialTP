@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import recursos.*;
 import utilidades.Configuracion;
 import utilidades.Aleatorio;
-import utilidades.Salida;
 
 public abstract class Planeta {
 

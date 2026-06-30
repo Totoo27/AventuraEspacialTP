@@ -8,6 +8,12 @@ public class Plasma extends Recurso{
 		
 	}
 	
+	public Plasma() {
+		
+		super("Plasma", 35, 15, 100);
+		
+	}
+	
 	public Plasma(Plasma plasma) {
 		super(plasma);
 	}

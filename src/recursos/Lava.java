@@ -8,6 +8,12 @@ public class Lava extends Recurso{
 		
 	}
 	
+	public Lava() {
+		
+		super("Lava", 35, 15, 100);
+		
+	}
+	
 	public Lava(Lava lava) {
 		super(lava);
 	}

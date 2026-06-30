@@ -7,6 +7,12 @@ public class NucleoEnergetico extends Recurso{
 		super("Nucleo energetico", 35, 15, probabilidad);
 		
 	}
+		
+	public NucleoEnergetico() {
+		
+		super("Núcleo Energético", 35, 15, 100);
+		
+	}
 	
 	public NucleoEnergetico(NucleoEnergetico nucleoEnergetico) {
 		super(nucleoEnergetico);

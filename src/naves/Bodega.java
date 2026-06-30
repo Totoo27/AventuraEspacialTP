@@ -17,7 +17,7 @@ public class Bodega {
 	
 	public void almacenarRecurso(Recurso recurso) {
 		if(comprobarCapacidad(recurso.getPeso())==false) {
-			System.out.println("No hay espeacio suficiente en la bodega");
+			System.out.println("No hay espacio suficiente en la bodega");
 		}
 		else {
 			recursos.add(recurso);
@@ -46,6 +46,7 @@ public class Bodega {
 			return;
 		}		
 
+		System.out.println("RECURSOS 2EN BODEGA:");
 		for( Recurso recurso: recursos) {
 			recurso.mostrarDatos();
 		}

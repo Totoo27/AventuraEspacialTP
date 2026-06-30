@@ -8,6 +8,10 @@ public class Cristal extends Recurso{
 		
 	}
 	
+	public Cristal() {
+		super("Cristal", 35, 15, 100);
+	}
+	
 	public Cristal(Cristal cristal) {
 		super(cristal);
 	}

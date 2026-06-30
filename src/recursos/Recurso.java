@@ -1,7 +1,5 @@
 package recursos;
 
-import utilidades.Salida;
-
 public abstract class Recurso {
 	
 	private String nombre;
@@ -36,7 +34,7 @@ public abstract class Recurso {
 	}
 	
 	public void mostrarDatos() {
-		Salida.imprimir("Nombre: " + this.nombre + " | " + this.peso + "T | " + this.valor + "$");
+		System.out.println("Nombre: " + this.nombre + " | " + this.peso + "T | " + this.valor + "$");
 	}
 
 	public String getNombre() {
