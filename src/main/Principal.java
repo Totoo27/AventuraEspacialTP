@@ -53,6 +53,7 @@ public class Principal {
 		switch(opcion) {
 		
 		case 1:
+			viajar(jugador,entrada);
 			break;
 			
 		case 2:
@@ -144,6 +145,37 @@ public class Principal {
 		Sistema.esperar(1000);
 	}
 	
+	public static void viajar(Jugador jugador,Entrada entrada) {
+		System.out.println("A que planeta desea viajar");
+		TipoPlaneta.mostrarPlanetas();
+		Planeta planetaViaje=elegirPlaneta(entrada.ingresarEntero(1,TipoPlaneta.values().length));
+		verificarPeligro(jugador);
+		if(jugador.getNave().getVida()<=0) {
+			System.out.println("La nave a sido destruida");
+			return;
+		}
+		else {
+			System.out.println("Has llegado al planeta " + planetaViaje.getNombre());
+		}
+		
+	}
+	
+	public static Planeta elegirPlaneta(int eleccion) {
+		
+		switch(eleccion) {
+			case 1:
+				return new Rocoso();
+			case 2:
+				return new Gaseoso();
+			case 3:
+				return new Volcanico();
+			default:
+				return null;
+		}
+		
+	}
+	
+	
 	public static void gestionarReparacionNave(Jugador jugador, Entrada entrada) {
 
 		final Nave NAVE = jugador.getNave();
@@ -182,20 +214,21 @@ public class Principal {
 		
 	}
 	
-	public static void verificarPeligro(Nave nave) {
+	public static void verificarPeligro(Jugador jugador) {
 		
-		int probabilidad = nave.getVelocidad().getProbabilidadPeligro();
+		int probabilidad = jugador.getNave().getVelocidad().getProbabilidadPeligro();
 		
 		if(Aleatorio.getRandomInt(1, 100) <= probabilidad) {
 			
 			Peligro peligro = getRandomPeligro();
 			System.out.println("Te has topado con un peligro espacial: " + peligro.getNombre());
-			peligro.realizarEvento(nave);
+			peligro.realizarEvento(jugador.getNave());
 			return;
 			
 		}
 		
 		System.out.println("No hubo ningun peligro");
+		
 		
 	}
 	
