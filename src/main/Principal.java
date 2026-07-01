@@ -16,19 +16,17 @@ public class Principal {
 		
 		Jugador jugador = ingresarJugador(entrada);
 		
-		jugador.getNave().getBodega().almacenarRecurso(new Gas());
-		
-		new PirataEspacial().realizarEvento(jugador.getNave());
+		jugador.mostrarDatos();
 		
 		mostrarMenuYElegirOpcion(entrada, jugador);
 		
-		cerrarSistema(entrada);
+		cerrarSistema(entrada, jugador, TipoSalida.SALIDA_VOLUNTARIA);
 		
 	}
 	
 	public static void mostrarMenuYElegirOpcion(Entrada entrada, Jugador jugador) {
 		
-		final int FIN = 8;
+		final int FIN = 9;
 		
 		do {
 			System.out.println();
@@ -40,9 +38,10 @@ public class Principal {
 			System.out.println("5. Terminar misión");
 			System.out.println("6. Reparar nave");
 			System.out.println("7. Descansar");
-			System.out.println("8. Terminar juego");
+			System.out.println("8. Ver estado del jugador");
+			System.out.println("9. Terminar juego");
 			System.out.print("Opcion: ");
-		}while(ingresarOpcion(entrada, FIN, jugador) != FIN);
+		}while(ingresarOpcion(entrada, FIN, jugador) != FIN && jugador.getNave().getVida() > 0);
 		
 	}
 	
@@ -83,6 +82,10 @@ public class Principal {
 			break;
 			
 		case 8:
+			jugador.mostrarDatos();
+			break;
+			
+		case 9:
 			
 			break;
 			
@@ -99,8 +102,7 @@ public class Principal {
 		String nombre;
 		System.out.println("Bienvenido al juego de aventura espacial!!");
 		System.out.println("¿Cual es su nombre viajero?");
-		nombre=entrada.ingresarTexto();
-	
+		nombre = entrada.ingresarTexto();
 		
 		return new Jugador(nombre,eleccionNave(entrada));
 	}
@@ -110,7 +112,7 @@ public class Principal {
 		mostrarNaves();
 		
 		System.out.println("\n¿Que nave desea tener?");
-		int naveElegida=entrada.ingresarEntero(1,3);
+		int naveElegida = entrada.ingresarEntero(1,3);
 		
 		switch(naveElegida) {
 			case 1:
@@ -121,7 +123,6 @@ public class Principal {
 				return new Galaxian();
 			default:
 				throw new IllegalStateException("Opción inválida.");
-				
 		}
 		
 		
@@ -146,17 +147,22 @@ public class Principal {
 	}
 	
 	public static void viajar(Jugador jugador,Entrada entrada) {
+		
 		System.out.println("A que planeta desea viajar");
 		TipoPlaneta.mostrarPlanetas();
-		Planeta planetaViaje=elegirPlaneta(entrada.ingresarEntero(1,TipoPlaneta.values().length));
-		verificarPeligro(jugador);
-		if(jugador.getNave().getVida()<=0) {
-			System.out.println("La nave a sido destruida");
+		
+		Planeta planetaViaje = elegirPlaneta(entrada.ingresarEntero(1,TipoPlaneta.values().length));
+		
+		mensajeEspera("Viajando", 1000);
+		verificarPeligro(jugador.getNave());
+		
+		if(jugador.getNave().getVida() <= 0) {
+			System.out.println("La nave ha sido destruida.");
+			cerrarSistema(entrada, jugador, TipoSalida.DERROTA);
 			return;
 		}
-		else {
-			System.out.println("Has llegado al planeta " + planetaViaje.getNombre());
-		}
+		
+		System.out.println("Has llegado al planeta " + planetaViaje.getNombre());
 		
 	}
 	
@@ -170,7 +176,7 @@ public class Principal {
 			case 3:
 				return new Volcanico();
 			default:
-				return null;
+				throw new IllegalStateException("Opción inválida.");
 		}
 		
 	}
@@ -214,15 +220,15 @@ public class Principal {
 		
 	}
 	
-	public static void verificarPeligro(Jugador jugador) {
+	public static void verificarPeligro(Nave nave) {
 		
-		int probabilidad = jugador.getNave().getVelocidad().getProbabilidadPeligro();
+		int probabilidad = nave.getVelocidad().getProbabilidadPeligro();
 		
 		if(Aleatorio.getRandomInt(1, 100) <= probabilidad) {
 			
 			Peligro peligro = getRandomPeligro();
 			System.out.println("Te has topado con un peligro espacial: " + peligro.getNombre());
-			peligro.realizarEvento(jugador.getNave());
+			peligro.realizarEvento(nave);
 			return;
 			
 		}
@@ -238,8 +244,9 @@ public class Principal {
 		System.out.print(mensaje);
 		for(int i = 0; i<3; i++) {
 			System.out.print(puntos);
-			Sistema.esperar(milisegundos);
+			Sistema.esperar(0);
 		}
+		System.out.println();
 		
 	}
 	
@@ -264,8 +271,13 @@ public class Principal {
 		
 	}
 	
-	public static void cerrarSistema(Entrada entrada) {
+	public static void cerrarSistema(Entrada entrada, Jugador jugador, TipoSalida razonSalida) {
 		
+		System.out.println("ESTADISTICAS FINALES DEL JUEGO: ");
+		jugador.mostrarDatos();
+		jugador.getNave().getBodega().mostrarRecursos();
+		
+		System.out.println("\n Resultado final: " + razonSalida.getTexto());
 		System.out.println("NOS VEMOS!");
 		entrada.cerrarScanner();
 		
