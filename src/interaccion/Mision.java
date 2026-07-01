@@ -17,9 +17,7 @@ public class Mision {
 		this.nombre = nombre;
 		this.requisitos = requisitos;
 		this.recompensa = recompensa;
-		
-		
-		
+			
 	}
 	
 	
@@ -43,6 +41,18 @@ public class Mision {
 
 	public void completar() {
 		completada = true;
+	}
+	
+	public void mostrarDatos() {
+		
+		System.out.println("Nombre de la mision: " +this.nombre);
+		
+		System.out.println("Requerimientos de la mision: " );
+		
+		for(Recurso recurso : requisitos) {
+			System.out.println( recurso.getNombre() );
+		}
+		
 	}
 	
 }

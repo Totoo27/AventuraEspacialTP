@@ -2,6 +2,8 @@ package interaccion;
 
 import java.util.ArrayList;
 
+import recursos.Cristal;
+import recursos.MineralComun;
 import recursos.Recurso;
 
 public class CatalogoMisiones {
@@ -9,9 +11,10 @@ public class CatalogoMisiones {
 
 	    private ArrayList<Mision> misiones;
 
-	    public CatalogoMisiones(ArrayList<Mision> misiones) {
-	    		
-	    	this.misiones = misiones;
+	    public CatalogoMisiones() {
+	    	this.misiones = new ArrayList<Mision>();
+	    	cargarMisiones();
+	    	
 	    }
 
 	    
@@ -27,11 +30,29 @@ public class CatalogoMisiones {
 	    }
 	    private void cargarMisiones() {
 	    		
-	    	misiones.add(new Mision(/*NOMBRE, REQUISITOS, RECOMPENSA*/));
+	    	ArrayList<Recurso> requisitos = new ArrayList<Recurso>();
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new Cristal(100));
+	    	
+	    	ArrayList<Recurso> requisitos2 = new ArrayList<Recurso>();
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new Cristal(100));
+	    	
+	    	ArrayList<Recurso> requisitos3 = new ArrayList<Recurso>();
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new MineralComun(100));
+	    	requisitos.add(new Cristal(100));
+	    	
+	    	misiones.add(new Mision("Reparación del casco exterior", 120, requisitos));
 
-	    	misiones.add(new Mision(/*NOMBRE, REQUISITOS, RECOMPENSA*/));
+	    	misiones.add(new Mision("Te quiero toto", 120, requisitos2));
 
-	    	misiones.add(new Mision(/*NOMBRE, REQUISITOS, RECOMPENSA*/));
+	    	misiones.add(new Mision("Reparación del casco exterior", 120, requisitos3));
 	    	
 	    	
 	    }

@@ -1,16 +1,18 @@
 package main;
 
 import utilidades.*;
-
+import interaccion.CatalogoMisiones;
 import planetas.*;
 
 public class Principal {
 
 	public static void main(String[] args) {
 
-		Planeta planeta = new Volcanico();
+		CatalogoMisiones catalogoMisiones = new CatalogoMisiones();
 		
-		planeta.mostrarDatos();
+		
+		
+		System.out.println(	catalogoMisiones.getMision(2).getNombre()	);
 	}
 
 }
