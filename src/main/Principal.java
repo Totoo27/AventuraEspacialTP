@@ -3,10 +3,10 @@ package main;
 import utilidades.*;
 
 import planetas.*;
+import enums.*;
 import interaccion.*;
 import naves.*;
 import peligros.*;
-import recursos.*;
 
 public class Principal {
 
@@ -100,26 +100,27 @@ public class Principal {
 	
 	public static Jugador ingresarJugador(Entrada entrada) {
 		String nombre;
-		System.out.println("Bienvenido al juego de aventura espacial!!");
+		System.out.println("¡Bienvenido a Aventura Espacial!");
 		System.out.println("¿Cual es su nombre viajero?");
 		nombre = entrada.ingresarTexto();
 		
-		return new Jugador(nombre,eleccionNave(entrada));
+		return new Jugador(nombre, elegirNave(entrada));
 	}
 	
-	public static Nave eleccionNave(Entrada entrada) {
-		System.out.println("Elija la nave con la que desa continuar su aventura");
+	public static Nave  elegirNave(Entrada entrada) {
+		System.out.println("Elija la nave con la que desa continuar su aventura:");
 		mostrarNaves();
 		
 		System.out.println("\n¿Que nave desea tener?");
-		int naveElegida = entrada.ingresarEntero(1,3);
+		int opcion = entrada.ingresarEntero(1,3);
+		EnumNave naveElegida = EnumNave.values()[opcion-1];
 		
 		switch(naveElegida) {
-			case 1:
+			case EnumNave.FENIX:
 				return  new Fenix();
-			case 2:
+			case EnumNave.ECLIPSE:
 				return new Eclipse();
-			case 3:
+			case EnumNave.GALAXIAN:
 				return new Galaxian();
 			default:
 				throw new IllegalStateException("Opción inválida.");
@@ -168,12 +169,14 @@ public class Principal {
 	
 	public static Planeta elegirPlaneta(int eleccion) {
 		
-		switch(eleccion) {
-			case 1:
+		TipoPlaneta planeta = TipoPlaneta.values()[eleccion-1];
+		
+		switch(planeta) {
+			case TipoPlaneta.ROCOSO:
 				return new Rocoso();
-			case 2:
+			case TipoPlaneta.GASEOSO:
 				return new Gaseoso();
-			case 3:
+			case TipoPlaneta.VOLCANICO:
 				return new Volcanico();
 			default:
 				throw new IllegalStateException("Opción inválida.");

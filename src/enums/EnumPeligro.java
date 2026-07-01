@@ -1,4 +1,4 @@
-package peligros;
+package enums;
 
 public enum EnumPeligro {
 

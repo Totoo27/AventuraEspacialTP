@@ -1,6 +1,8 @@
 package planetas;
 
 import java.util.ArrayList;
+
+import enums.TipoPlaneta;
 import recursos.*;
 import utilidades.Configuracion;
 import utilidades.Aleatorio;

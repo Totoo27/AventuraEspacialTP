@@ -1,4 +1,4 @@
-package planetas;
+package enums;
 
 public enum TipoPlaneta {
 	

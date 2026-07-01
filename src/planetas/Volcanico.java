@@ -2,6 +2,7 @@ package planetas;
 
 import java.util.ArrayList;
 
+import enums.TipoPlaneta;
 import recursos.*;
 
 public class Volcanico extends Planeta {
