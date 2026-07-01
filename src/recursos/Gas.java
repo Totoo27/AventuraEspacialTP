@@ -4,13 +4,13 @@ public class Gas extends Recurso{
 
 	public Gas(int probabilidad) {
 		
-		super("Gas", 35, 15, probabilidad);
+		super("Gas", 15, 20, probabilidad);
 		
 	}
 	
 	public Gas() {
 		
-		super("Gas", 35, 15, 100);
+		super("Gas", 15, 20, 100);
 		
 	}
 	

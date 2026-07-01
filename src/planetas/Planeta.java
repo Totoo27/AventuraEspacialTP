@@ -67,6 +67,7 @@ public abstract class Planeta {
 	public String getNombre() {
 		return this.tipo.getNombre() ;
 	}
+	
 	public void mostrarDatos() {
 		
 		System.out.println("Planeta " + this.tipo.getNombre());

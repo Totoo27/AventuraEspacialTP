@@ -4,13 +4,13 @@ public class MineralComun extends Recurso{
 
 public MineralComun(int probabilidad) {
 		
-		super("Mineral comun", 35, 15, probabilidad);
+		super("Mineral comun", 10, 10, probabilidad);
 		
 	}
 	
 	public MineralComun() {
 		
-		super("Mineral comun", 35, 15, 100);
+		super("Mineral comun", 10, 10, 100);
 		
 	}
 	

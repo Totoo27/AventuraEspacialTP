@@ -16,14 +16,12 @@ public class Bodega {
 	}
 	
 	public void almacenarRecurso(Recurso recurso) {
+		
 		if(comprobarCapacidad(recurso.getPeso())==false) {
-			System.out.println("No hay espacio suficiente en la bodega");
+			throw new IllegalArgumentException("No hay espacio suficiente en la bodega");
 		}
-		else {
-			recursos.add(recurso);
-			System.out.println("Recurso guardado con exito");
-			capacidad-=recurso.getPeso();
-		}
+		
+		recursos.add(recurso);
 		
 	}
 	
@@ -46,10 +44,12 @@ public class Bodega {
 			return;
 		}		
 
-		System.out.println("RECURSOS 2EN BODEGA:");
+		System.out.println("\nBODEGA:");
 		for( Recurso recurso: recursos) {
 			recurso.mostrarDatos();
 		}
+				
+		System.out.println("\nEspacio disponible: " + (capacidad - calcularCarga()) + "T");
 		
 	}
 	
@@ -58,9 +58,9 @@ public class Bodega {
 		if(calcularCarga() + peso > capacidad) {
 			return false;
 		}
-		else {
-			return true;
-		}
+		
+		return true;
+
 		
 	}
 	public int calcularCarga() {

@@ -4,13 +4,13 @@ public class Lava extends Recurso{
 
 	public Lava(int probabilidad) {
 		
-		super("Lava", 35, 15, probabilidad);
+		super("Lava", 20, 30, probabilidad);
 		
 	}
 	
 	public Lava() {
 		
-		super("Lava", 35, 15, 100);
+		super("Lava", 20, 30, 100);
 		
 	}
 	

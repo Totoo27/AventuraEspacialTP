@@ -3,6 +3,7 @@ package main;
 import utilidades.*;
 
 import planetas.*;
+import recursos.Recurso;
 import enums.*;
 import interaccion.*;
 import naves.*;
@@ -29,8 +30,7 @@ public class Principal {
 		final int FIN = 9;
 		
 		do {
-			System.out.println();
-			System.out.println("--- AVENTURA ESPACIAL ---");
+			System.out.println("\n--- AVENTURA ESPACIAL ---");
 			System.out.println("1. Viajar a un planeta");
 			System.out.println("2. Ver bodega de la nave");
 			System.out.println("3. Vender recursos");
@@ -38,16 +38,16 @@ public class Principal {
 			System.out.println("5. Terminar misión");
 			System.out.println("6. Reparar nave");
 			System.out.println("7. Descansar");
-			System.out.println("8. Ver estado del jugador");
+			System.out.println("8. Ver estado actual");
 			System.out.println("9. Terminar juego");
 			System.out.print("Opcion: ");
 		}while(ingresarOpcion(entrada, FIN, jugador) != FIN && jugador.getNave().getVida() > 0);
 		
 	}
 	
-	public static int ingresarOpcion(Entrada entrada, int fin, Jugador jugador) {
+	public static int ingresarOpcion(Entrada entrada, final int FIN, Jugador jugador) {
 		
-		int opcion = entrada.ingresarEntero(1, fin);
+		int opcion = entrada.ingresarEntero(1, FIN);
 		
 		switch(opcion) {
 		
@@ -107,7 +107,7 @@ public class Principal {
 		return new Jugador(nombre, elegirNave(entrada));
 	}
 	
-	public static Nave  elegirNave(Entrada entrada) {
+	public static Nave elegirNave(Entrada entrada) {
 		System.out.println("Elija la nave con la que desa continuar su aventura:");
 		mostrarNaves();
 		
@@ -149,8 +149,9 @@ public class Principal {
 	
 	public static void viajar(Jugador jugador,Entrada entrada) {
 		
-		System.out.println("A que planeta desea viajar");
+		System.out.println("Elija a que planeta desea viajar:");
 		TipoPlaneta.mostrarPlanetas();
+		System.out.print("Opcion: ");
 		
 		Planeta planetaViaje = elegirPlaneta(entrada.ingresarEntero(1,TipoPlaneta.values().length));
 		
@@ -163,7 +164,89 @@ public class Principal {
 			return;
 		}
 		
-		System.out.println("Has llegado al planeta " + planetaViaje.getNombre());
+		mostrarMenuPlaneta(planetaViaje, entrada, jugador);
+		
+	}
+	
+	public static void mostrarMenuPlaneta(Planeta planeta, Entrada entrada, Jugador jugador) {
+		
+		final int FIN = 4;
+		
+		do {
+			
+			System.out.println("\nPlaneta " + planeta.getNombre() + ": ");
+			System.out.println("1. Minar");
+			System.out.println("2. Analizar planeta");
+			System.out.println("3. Viajar a otro planeta");
+			System.out.println("4. Volver a la base");
+			System.out.print("opcion: ");
+			
+		}while(ingresarOpcionPlaneta(entrada, jugador, FIN, planeta) != FIN);
+		
+	}
+	
+	public static int ingresarOpcionPlaneta(Entrada entrada, Jugador jugador, final int FIN, Planeta planeta) {
+		
+		int opcion = entrada.ingresarEntero(1, FIN);
+		
+		switch(opcion) {
+		
+		case 1:
+			minar(jugador, planeta);
+			break;
+			
+		case 2:
+			mensajeEspera("Analizando", 1500);
+			planeta.mostrarDatos();
+			break;
+			
+		case 3:
+			viajar(jugador, entrada);
+			return FIN;
+			
+		case 4:
+			
+			mensajeEspera("Volviendo a la base", 1250);
+			verificarPeligro(jugador.getNave());
+			// Volver a la base
+			
+			break;
+			
+		default:
+			System.out.println("Hubo un error al ingresar opción.");
+		}
+		
+		return opcion;
+	}
+	
+	public static void minar(Jugador jugador, Planeta planeta) {
+		
+		mensajeEspera("Minando", 500);
+		
+		final int GASTO_MINIMO = 10;
+		final int GASTO_MAXIMO = 25;
+		
+		int gastoEnergia = Aleatorio.getRandomInt(GASTO_MINIMO, GASTO_MAXIMO);
+		
+		if(jugador.getEnergia() - gastoEnergia < 0) {
+			System.out.println("Te ves muy agotado para minar.");
+			return;
+		}
+
+		jugador.restarEnergia(gastoEnergia);
+		System.out.println("Gastaste un " + gastoEnergia + "% de energía minando.");
+		System.out.println("Energía restante: " + jugador.getEnergia() + "%");
+		
+		Recurso recurso = planeta.getRecursoAleatorio();
+		Bodega bodega = jugador.getNave().getBodega();
+		
+		if(!bodega.comprobarCapacidad(recurso.getPeso())) {
+			System.out.println("Se ha intentado recolectar " + recurso.getNombre() + " pero la bodega no tiene suficiente espacio.");
+			return;
+		}
+		
+		bodega.almacenarRecurso(recurso);
+		System.out.println("Minaste y almacenaste " + recurso.getNombre() + " exitosamente!");
 		
 	}
 	
@@ -183,7 +266,6 @@ public class Principal {
 		}
 		
 	}
-	
 	
 	public static void gestionarReparacionNave(Jugador jugador, Entrada entrada) {
 
@@ -236,18 +318,19 @@ public class Principal {
 			
 		}
 		
-		System.out.println("No hubo ningun peligro");
-		
-		
 	}
 	
 	public static void mensajeEspera(String mensaje, int milisegundos) {
+		
+		if(milisegundos < 0){
+			throw new IllegalArgumentException("los milisegundos no pueden ser negativos");
+		}
 		
 		String puntos = ".";
 		System.out.print(mensaje);
 		for(int i = 0; i<3; i++) {
 			System.out.print(puntos);
-			Sistema.esperar(0);
+			Sistema.esperar(milisegundos);
 		}
 		System.out.println();
 		
@@ -276,11 +359,12 @@ public class Principal {
 	
 	public static void cerrarSistema(Entrada entrada, Jugador jugador, TipoSalida razonSalida) {
 		
-		System.out.println("ESTADISTICAS FINALES DEL JUEGO: ");
+		System.out.println("ESTADISTICAS FINALES DEL JUEGO:\n");
+		
 		jugador.mostrarDatos();
 		jugador.getNave().getBodega().mostrarRecursos();
 		
-		System.out.println("\n Resultado final: " + razonSalida.getTexto());
+		System.out.println("\nResultado final: " + razonSalida.getTexto());
 		System.out.println("NOS VEMOS!");
 		entrada.cerrarScanner();
 		

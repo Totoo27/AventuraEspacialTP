@@ -4,13 +4,13 @@ public class NucleoEnergetico extends Recurso{
 
 	public NucleoEnergetico(int probabilidad) {
 		
-		super("Nucleo energetico", 35, 15, probabilidad);
+		super("Nucleo energetico", 80, 40, probabilidad);
 		
 	}
 		
 	public NucleoEnergetico() {
 		
-		super("Núcleo Energético", 35, 15, 100);
+		super("Núcleo Energético", 80, 40, 100);
 		
 	}
 	

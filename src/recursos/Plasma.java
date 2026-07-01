@@ -4,13 +4,13 @@ public class Plasma extends Recurso{
 
 	public Plasma(int probabilidad) {
 		
-		super("Plasma", 35, 15, probabilidad);
+		super("Plasma", 45, 25, probabilidad);
 		
 	}
 	
 	public Plasma() {
 		
-		super("Plasma", 35, 15, 100);
+		super("Plasma", 45, 25, 100);
 		
 	}
 	
