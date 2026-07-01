@@ -14,7 +14,7 @@ public class Principal {
 
 		Entrada entrada = new Entrada();
 		
-		Jugador jugador = new Jugador("Pepe", new Fenix());
+		Jugador jugador = ingresarJugador(entrada);
 		
 		jugador.getNave().getBodega().almacenarRecurso(new Gas());
 		
@@ -78,7 +78,7 @@ public class Principal {
 		case 7:
 			mensajeEspera("Descansando", 1000);
 			jugador.descansar();
-			System.out.println("Energía recargada exitosamente: " + jugador.getEnergia() + "%");
+			System.out.println("\nEnergía recargada exitosamente: " + jugador.getEnergia() + "%");
 			break;
 			
 		case 8:
@@ -92,6 +92,56 @@ public class Principal {
 		
 		return opcion;
 		
+	}
+	
+	public static Jugador ingresarJugador(Entrada entrada) {
+		String nombre;
+		System.out.println("Bienvenido al juego de aventura espacial!!");
+		System.out.println("¿Cual es su nombre viajero?");
+		nombre=entrada.ingresarTexto();
+	
+		
+		return new Jugador(nombre,eleccionNave(entrada));
+	}
+	
+	public static Nave eleccionNave(Entrada entrada) {
+		System.out.println("Elija la nave con la que desa continuar su aventura");
+		mostrarNaves();
+		
+		System.out.println("\n¿Que nave desea tener?");
+		int naveElegida=entrada.ingresarEntero(1,3);
+		
+		switch(naveElegida) {
+			case 1:
+				return  new Fenix();
+			case 2:
+				return new Eclipse();
+			case 3:
+				return new Galaxian();
+			default:
+				throw new IllegalStateException("Opción inválida.");
+				
+		}
+		
+		
+	}
+	
+	public static void mostrarNaves() {
+		Nave fenix = new Fenix();
+		Nave eclipse = new Eclipse();
+		Nave galaxian = new Galaxian();
+		
+		System.out.print("1. ");
+		fenix.mostrarDatos();
+		Sistema.esperar(1000);
+		
+		System.out.print("\n2. ");
+		eclipse.mostrarDatos();
+		Sistema.esperar(1000);
+		
+		System.out.print("\n3. ");
+		galaxian.mostrarDatos();
+		Sistema.esperar(1000);
 	}
 	
 	public static void gestionarReparacionNave(Jugador jugador, Entrada entrada) {
@@ -152,10 +202,9 @@ public class Principal {
 	public static void mensajeEspera(String mensaje, int milisegundos) {
 		
 		String puntos = ".";
-		
+		System.out.print(mensaje);
 		for(int i = 0; i<3; i++) {
-			System.out.println(mensaje + puntos);
-			puntos += ".";
+			System.out.print(puntos);
 			Sistema.esperar(milisegundos);
 		}
 		

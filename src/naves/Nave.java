@@ -17,8 +17,7 @@ public class Nave {
 	
 	public void mostrarDatos() {
 		
-		System.out.println("Datos de la nave:");
-		System.out.println("Nombre: " + nombre);
+		System.out.println("Datos de la nave " + nombre);
 		System.out.println("Vida: " + this.vida + "%");
 		System.out.println("Velocidad: " + velocidad);
 		System.out.println("Capacidad de la bodega: " + bodega.getCapacidad() + "T");

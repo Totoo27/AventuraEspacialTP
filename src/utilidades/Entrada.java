@@ -7,6 +7,9 @@ public class Entrada{
 
 	private Scanner s = new Scanner(System.in);
 	
+	public String ingresarTexto() {
+		return s.nextLine();
+	}
 	public int ingresarEntero(int min, int max) {
 		
 		if(min > max) {
